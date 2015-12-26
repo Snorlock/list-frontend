@@ -1,9 +1,0 @@
-{
-  "firebase": "lettherebelight",
-  "public": "public",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}
