@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node_modules/gulp/bin/gulp.js watch",
     "build": "node_modules/gulp/bin/gulp.js build",
+    "css": "node_modules/gulp/bin/gulp.js sass",
     "serve": "node_modules/gulp/bin/gulp.js serve"
   },
   "author": "Snorrre Lothar von Gohren Edwin <snorre.edwin@gmail.com> (https://github.com/Snorlock)",
@@ -19,6 +20,8 @@
     "browserify": "^12.0.1",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.3.1",
+    "gulp-sass": "^2.1.1",
+    "gulp-watch": "^4.3.5",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "vinyl-source-stream": "^1.1.0"

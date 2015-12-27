@@ -3,6 +3,7 @@ import babelify from 'babelify';
 import connect from 'gulp-connect';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
+import sass from 'gulp-sass'
 
 gulp.task('babelify', () => {
     return browserify({
@@ -24,20 +25,28 @@ gulp.task('connect', () => {
   });
 });
 
+gulp.task('sass', function () {
+  gulp.src('./sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/css'));
+});
+
 gulp.task('reload-js', ['babelify'], () => {
-    gulp.src('./js/app.jsx').pipe(connect.reload());
+    return gulp.src('public/bundle.js').pipe(connect.reload());
 });
 gulp.task('reload-html', () => {
-    gulp.src('./public/index.html').pipe(connect.reload());
+    return gulp.src('public/index.html').pipe(connect.reload());
 });
-gulp.task('reload-css', () => {
-    gulp.src('./css/*.css').pipe(connect.reload());
+gulp.task('reload-css', ['sass'], () => {
+    return gulp.src('public/css/*.css').pipe(connect.reload());
 });
 
 gulp.task('watch', () => {
-    gulp.watch(['./js/**/*.jsx'], ['reload-js']);
-    gulp.watch(['./public/index.html'], ['reload-html']);
-    gulp.watch(['./css/*.css'], ['reload-css']);
+    gulp.watch(['./js/**/*.jsx'], ['babelify']);
+    gulp.watch(['./sass/**/*.scss'], ['sass']);
+    gulp.watch('public/', function() {
+      return gulp.src(distPaths).pipe(connect.reload());
+    });
 })
 
 gulp.task('serve', ['babelify', 'connect', 'watch']);

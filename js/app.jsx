@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 var Hello = React.createClass({
     render: function() {
-        return <div>Hello {this.props.name}</div>;
+        return <div>Hellopppp {this.props.name}</div>;
     }
 });
 
