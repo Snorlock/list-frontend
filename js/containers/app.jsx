@@ -17,10 +17,9 @@ class App extends React.Component {
         <div><Facebook actions={actions}/></div>
       )
     }
-    
     return (
       <div>
-        <Header logout={actions.loggedOut} />
+        <Header logout={actions.loggedOut} addTodo={actions.addTodo} />
         {this.props.children}
       </div>
     )
