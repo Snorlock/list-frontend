@@ -10,11 +10,11 @@ class Facebook extends React.Component {
         </div>
     }
     authFacebook () {
-      Auth('http://localhost:8000','facebook', token => {
+      Auth('http://list.slvge.me','facebook', token => {
         this.props.actions.loggedIn(token);
       })
     }
 
-    
+
 }
 export default Facebook;

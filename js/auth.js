@@ -4,7 +4,7 @@ export default function auth(url, provider, callback) {
 
 
   var ref = window.open(
-    url+"/auth/"+provider,
+    url+"/auth/"+provider+"?url="+window.location.href,
     "FacebookAuth",
     "resizable=true,width=600,height=600,scrollbar=false,centerscreen=true"
   )
