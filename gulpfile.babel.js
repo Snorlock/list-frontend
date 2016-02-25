@@ -3,11 +3,35 @@ import babelify from 'babelify';
 import connect from 'gulp-connect';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
-import sass from 'gulp-sass'
+import sass from 'gulp-sass';
+import del from 'del';
+import rename from 'gulp-rename';
 
-gulp.task('babelify', () => {
+let settings = {
+  environment: process.env.SERVE_ENV || 'prod'
+}
+
+
+gulp.task('clean', function(cb) {
+  return del([
+    './build/**/*'
+  ], cb);
+});
+
+gulp.task('config', ['clean'], function() {
+  return gulp.src('./config/'+settings.environment+'.js')
+             .pipe(rename('config.js'))
+             .pipe(gulp.dest('./build'));
+});
+
+gulp.task('src', ['config'], function() {
+  return gulp.src('./js/**/*')
+             .pipe(gulp.dest('./build'));
+});
+
+gulp.task('babelify', ['src'], () => {
     return browserify({
-        entries: './js/index.jsx',
+        entries: './build/index.jsx',
         extensions: ['.jsx', '.js'],
         debug: true
     })

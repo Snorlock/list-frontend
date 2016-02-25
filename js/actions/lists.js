@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes'
 import * as RequestActions from './request'
 import request from 'superagent'
+import config from '../config'
 
 function recieveList(json) {
   return { type: types.RECIEVE_LIST, json }
@@ -15,7 +16,7 @@ export function fetchList(id) {
   return dispatch => {
     dispatch(RequestActions.requesting())
     return request
-    .get('http://localhost:8000/lists/'+id)
+    .get(config.api.host+'/lists/'+id)
     .withCredentials()
     .set('Authorization', 'bearer '+localStorage.getItem('token'))
     .accept('json')
@@ -34,7 +35,7 @@ export function fetchLists() {
   return dispatch => {
     dispatch(RequestActions.requesting())
     return request
-    .get('http://localhost:8000/lists')
+    .get(config.api.host+'/lists')
     .withCredentials()
     .set('Authorization', 'bearer '+localStorage.getItem('token'))
     .accept('json')

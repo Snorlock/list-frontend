@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import Request from 'superagent'
 import Auth from './auth'
+import config from './config';
 
 class Facebook extends React.Component {
     render () {
@@ -10,7 +11,7 @@ class Facebook extends React.Component {
         </div>
     }
     authFacebook () {
-      Auth('http://list.slvge.me','facebook', token => {
+      Auth(config.api.host,'facebook', token => {
         this.props.actions.loggedIn(token);
       })
     }
