@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header.jsx'
+import Header from '../components/header.jsx'
 import MainSection from '../components/MainSection.jsx'
 import Facebook from '../facebook.jsx'
 import { bindActionCreators } from 'redux'
@@ -10,8 +10,8 @@ import reduxConnector from '../util/reduxConnector'
 
 class App extends React.Component {
   render() {
+
     const { authorized, actions } = this.props
-    console.log(this.props)
     if(!authorized) {
       return (
         <div><Facebook actions={actions}/></div>
@@ -19,7 +19,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <Header logout={actions.loggedOut} addTodo={actions.addTodo} />
+        <Header logout={actions.loggedOut} />
         {this.props.children}
       </div>
     )

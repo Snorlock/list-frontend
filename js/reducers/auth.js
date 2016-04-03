@@ -1,4 +1,4 @@
-import { LOGGED_IN, LOGGED_OUT } from '../constants/ActionTypes'
+import { LOGGED_IN, LOGGED_OUT, REQUEST_UNAUTHORIZED } from '../constants/ActionTypes'
 
 const initialState =
   {
@@ -11,6 +11,7 @@ export default function auth(state = initialState, action) {
       localStorage.setItem('token', action.token)
       return state =  { authorized: true }
     case LOGGED_OUT:
+    case REQUEST_UNAUTHORIZED:
       localStorage.removeItem('token')
       return state =  { authorized: false }
     default:

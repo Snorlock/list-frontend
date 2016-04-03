@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import TodoItem from './TodoItem.jsx'
-import List from './List.jsx'
+import List from './list.jsx'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ListActions from '../actions/lists'
+import * as RequestActions from '../actions/request'
 import * as TodosActions from '../actions/todos'
 import reduxConnector from '../util/reduxConnector'
+import NewTodo from './newTodo.jsx'
 // import Footer from './Footer'
 // import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters'
 //
@@ -67,10 +69,11 @@ class MainSection extends Component {
 
   render() {
     const { lists, actions } = this.props
-    // const { filter } = this.state
     if(!lists) {
       return (
+
         <section className="main">
+          <NewTodo handleSave={actions.saveList}></NewTodo>
           <ul className="todo-list">
             No Items
           </ul>
@@ -78,15 +81,14 @@ class MainSection extends Component {
       )
     }
     return (
-      // {this.renderToggleAll(completedCount)}
       <section className="main">
+        <NewTodo handleSave={actions.saveList}></NewTodo>
         <ul className="todo-list">
           {lists.map(list =>
-            <List list={list}/>
+            <List key={list.Id} list={list}/>
           )}
         </ul>
       </section>
-      // {this.renderFooter(completedCount)}
     )
   }
 }
@@ -95,6 +97,7 @@ MainSection.propTypes = {
   lists: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
+
 function mapStateToProps(state) {
   return {
     lists: state.lists
